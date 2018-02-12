@@ -20,7 +20,7 @@ import java.util.Random;
 public class Face extends SurfaceView {
 
     private Random rnd = new Random(); //generates random number
-    private Paint paintSkin, paintEye, rndPaintHair, white; //create paint colors
+    private Paint paintSkin, paintEye, rndPaintHair, white, black; //create paint colors
     private SurfaceView sv;
 
     public Face(Context context) {
@@ -62,13 +62,21 @@ public class Face extends SurfaceView {
         //setting white to color of sclera
         white = new Paint();
         white.setColor(Color.WHITE);
+        //setting black to color of pupil
+        black = new Paint();
+        black.setColor(Color.BLACK);
 
-        canvas.drawRect(300.0f, 300.0f, 1400.0f, 1200.f, rndPaintHair);
+        canvas.drawRect(310.0f, 300.0f, 1490.0f, 1200.f, rndPaintHair);
         canvas.drawCircle(900f, 1100f, 600f, paintSkin);
+        //sclera drawing
         canvas.drawOval(500f, 800f, 800f, 1100f, white);
-        canvas.drawOval(1200f, 800f, 1350f, 1100f, white);
-        canvas.drawCircle(650f, 950f, 100f, paintEye);
-        canvas.drawCircle(1200f, 950f, 100f, paintEye);
+        canvas.drawOval(1000f, 800f, 1300f, 1100f, white);
+        //pupil drawing
+        canvas.drawCircle(650f, 950f, 120f, black);
+        canvas.drawCircle(1150f, 950f, 120f, black);
+        //iris drawing
+        canvas.drawCircle(650f, 950f, 75f, paintEye);
+        canvas.drawCircle(1150f, 950f, 75f, paintEye);
 
     }
 
