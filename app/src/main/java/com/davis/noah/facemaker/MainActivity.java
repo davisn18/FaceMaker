@@ -16,40 +16,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-    }
-
-    private SeekBar.OnSeekBarChangeListener seekListener = new SeekBar.OnSeekBarChangeListener()
-    {
         TextView textRed = (TextView)findViewById(R.id.redTV);
         TextView textGreen = (TextView)findViewById(R.id.greenTV);
         TextView textBlue = (TextView)findViewById(R.id.blueTV);
+        //register seekListener with the three TextViews
+        seekListener listenSeek = new seekListener(textRed, textGreen, textBlue);
+        //set each seekbar to run off the seekListener
+        SeekBar seekRed = (SeekBar)findViewById(R.id.sbRed);
+        SeekBar seekGreen = (SeekBar)findViewById(R.id.sbGreen);
+        SeekBar seekBlue = (SeekBar)findViewById(R.id.sbBlue);
+        seekRed.setOnSeekBarChangeListener(listenSeek);
+        seekGreen.setOnSeekBarChangeListener(listenSeek);
+        seekBlue.setOnSeekBarChangeListener(listenSeek);
 
-        @Override
-        public void onProgressChanged (SeekBar colorSeekBars,int progress, boolean fromUser){
-        switch (colorSeekBars.getId()) {
 
-            case R.id.sbRed:
-                textRed.setText("Red: " + progress);
-                break;
 
-            case R.id.sbGreen:
-                textGreen.setText("Green: " + progress);
-                break;
-
-            case R.id.sbBlue:
-                textBlue.setText("Blue: " + progress);
-                break;
-        }
     }
 
-        @Override
-        public void onStartTrackingTouch (SeekBar seekBar){
-        //do nothing
-    }
-
-        @Override
-        public void onStopTrackingTouch (SeekBar seekBar){
-        //do nothing
-    }
-    };
 }
