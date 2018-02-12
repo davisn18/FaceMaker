@@ -2,9 +2,14 @@ package com.davis.noah.facemaker;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.SurfaceView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+/**
+ * Created by Noah Davis on 2/12/2018.
+ */
 
 public class MainActivity extends AppCompatActivity {
 

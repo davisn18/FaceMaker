@@ -10,7 +10,7 @@ import static com.davis.noah.facemaker.R.id.greenTV;
 import static com.davis.noah.facemaker.R.id.redTV;
 
 /**
- * Created by Noah on 2/12/2018.
+ * Created by Noah Davis on 2/12/2018.
  */
 
 public class seekListener implements SeekBar.OnSeekBarChangeListener {

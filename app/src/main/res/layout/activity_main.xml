@@ -22,11 +22,12 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp">
 
-        <SurfaceView
-            android:id="@+id/surfaceView"
-            android:layout_width="884dp"
+        <com.davis.noah.facemaker.Face
+            android:id="@+id/svFace"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@android:color/background_light"
             tools:layout_editor_absoluteY="0dp"
             tools:layout_editor_absoluteX="8dp" />
 
@@ -41,7 +42,7 @@
             <RadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
+                android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
@@ -68,20 +69,22 @@
                     android:id="@+id/rbSkin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+
                     android:layout_weight="0"
                     android:layout_marginLeft="40dp"
                     android:layout_marginRight="40dp"
                     android:text="Skin" />
 
-                <RadioButton
-                    android:id="@+id/rbRandomFace"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:layout_marginLeft="40dp"
-                    android:text="Random Face" />
-
             </RadioGroup>
+
+            <Button
+                android:id="@+id/bnRandomFace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="40dp"
+                android:text="Random Face" />
 
             <Spinner
                 android:id="@+id/hairStyleSpin"

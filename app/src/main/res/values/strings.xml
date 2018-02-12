@@ -6,4 +6,20 @@
         <item>Bald</item>
         <item>Flat Top</item>
     </string-array>
+    <string-array name="eyeColors">
+        <item>#663300</item>
+        <item>#00FF00</item>
+        <item>#0000FF</item>
+        <item>#FF0000</item>
+        <item>#776536</item>
+        <item>#808080</item>
+    </string-array>
+    <string-array name="skinColors">
+        <item>#FEE189</item>
+        <item>#FDC786</item>
+        <item>#FCBD84</item>
+        <item>#BF9765</item>
+        <item>#633C1D</item>
+        <item>#190F07</item>
+    </string-array>
 </resources>
