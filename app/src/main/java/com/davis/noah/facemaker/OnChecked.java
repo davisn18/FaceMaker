@@ -27,6 +27,9 @@ public class OnChecked implements RadioGroup.OnCheckedChangeListener {
 
     @Override
     public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+        //checks ID of radiobutton, each case is the ID of it
+        //sets RGB seekbars to the given RGB values of that radiobuttton's color
+        //0 = red, 1 = green, 2 = blue (in order of arraylist above)
         switch (checkedId) {
             case R.id.rbHair:
                 seeks.get(0).setProgress(Colors.getInstance().rHair);

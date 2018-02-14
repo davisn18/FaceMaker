@@ -24,7 +24,6 @@ public class Face extends SurfaceView {
     private int redSkin, greenSkin, blueSkin, redEye, greenEye, blueEye, redHair, greenHair, blueHair;
     private String hairStyleString;
     private int hairStyle; //takes on random value
-    private boolean calledOnce; //keeps control of not setting global vars twice (in randomize method)
     private List<String> hairText; //keeps hairStyles in a string list
 
     private SurfaceView sv;
@@ -74,8 +73,7 @@ public class Face extends SurfaceView {
         black = new Paint();
         black.setColor(Color.BLACK);
 
-        drawHair(canvas, hairStyleString);
-
+        drawHair(canvas, hairText.get(Colors.getInstance().hairstyle));
         canvas.drawCircle(900f, 1100f, 600f, paintSkin); //draw head
         //sclera drawing
         canvas.drawOval(500f, 800f, 800f, 1100f, white);
@@ -95,11 +93,13 @@ public class Face extends SurfaceView {
     }
 
     /*
-     * method draws hair from randomly selected hairstyle
+     * method draws hair from randomly selected hairstyle or changed spinner value
      */
     private void drawHair(Canvas canvas, String hair) {
         if (hair.equals("Mohawk"))
             canvas.drawRect(700f, 100f, 1100f, 1000f, rndPaintHair);
+        else if (hair.equals("Bald"))
+            canvas.drawRect(0.0f, 0.0f, 1700.0f, 1400.f, white);
         else if (hair.equals("Flat Top"))
             canvas.drawRect(310.0f, 300.0f, 1490.0f, 1200.f, rndPaintHair);
         else if (hair.equals("Afro"))
@@ -108,32 +108,57 @@ public class Face extends SurfaceView {
             return;
     }
 
+    /*
+     * Checker is used to check the given local color variables of this class
+     * to the global color and hairstyle variables
+     *
+     * If the local one doesn't match the global one, it means that
+     * the global one was set in another class/method, so the colors have changed
+     * It handles this by changing the paint color to the correct RGB value
+     * using the global variable rather the the local one
+     */
     public void Checker() {
-        if (calledOnce == true) {
-            if (Colors.getInstance().hairstyle != hairStyle)
-                hairStyleString = hairText.get(Colors.getInstance().hairstyle);
-            if (redSkin != Colors.getInstance().rSkin) {
-                paintSkin.setARGB(0xFF, Colors.getInstance().rSkin, greenSkin, blueSkin);
-                invalidate();
-                return;
-            }
-            if (greenSkin != Colors.getInstance().gSkin)
-                paintSkin.setARGB(0xFF, redSkin, Colors.getInstance().gSkin, blueSkin);
-            if (blueSkin != Colors.getInstance().bSkin)
-                paintSkin.setARGB(0xFF, redSkin, greenSkin, Colors.getInstance().bSkin);
-            if (redHair != Colors.getInstance().rHair)
-                rndPaintHair.setARGB(0xFF, Colors.getInstance().rHair, greenHair, blueHair);
-            if (greenHair != Colors.getInstance().gHair)
-                rndPaintHair.setARGB(0xFF, redHair, Colors.getInstance().gHair, blueHair);
-            if (blueHair != Colors.getInstance().bHair)
-                rndPaintHair.setARGB(0xFF, redHair, greenHair, Colors.getInstance().bHair);
-            if (redEye != Colors.getInstance().rEye)
-                paintEye.setARGB(0xFF, Colors.getInstance().rEye, greenEye, blueEye);
-            if (greenEye != Colors.getInstance().gEye)
-                paintEye.setARGB(0xFF, redEye, Colors.getInstance().gEye, blueEye);
-            if (blueEye != Colors.getInstance().bEye)
-                paintEye.setARGB(0xFF, redEye, greenEye, Colors.getInstance().bEye);
+
+        if (Colors.getInstance().hairstyle != hairStyle)
+            hairStyleString = hairText.get(Colors.getInstance().hairstyle);
+
+        if (redSkin != Colors.getInstance().rSkin) {
+            paintSkin.setARGB(0xFF, Colors.getInstance().rSkin, greenSkin, blueSkin);
+            invalidate();
         }
+        if (greenSkin != Colors.getInstance().gSkin) {
+            paintSkin.setARGB(0xFF, redSkin, Colors.getInstance().gSkin, blueSkin);
+            invalidate();
+        }
+        if (blueSkin != Colors.getInstance().bSkin) {
+            paintSkin.setARGB(0xFF, redSkin, greenSkin, Colors.getInstance().bSkin);
+            invalidate();
+        }
+        if (redHair != Colors.getInstance().rHair) {
+            rndPaintHair.setARGB(0xFF, Colors.getInstance().rHair, greenHair, blueHair);
+            invalidate();
+        }
+        if (greenHair != Colors.getInstance().gHair) {
+            rndPaintHair.setARGB(0xFF, redHair, Colors.getInstance().gHair, blueHair);
+            invalidate();
+        }
+        if (blueHair != Colors.getInstance().bHair) {
+            rndPaintHair.setARGB(0xFF, redHair, greenHair, Colors.getInstance().bHair);
+            invalidate();
+        }
+        if (redEye != Colors.getInstance().rEye) {
+            paintEye.setARGB(0xFF, Colors.getInstance().rEye, greenEye, blueEye);
+            invalidate();
+        }
+        if (greenEye != Colors.getInstance().gEye) {
+            paintEye.setARGB(0xFF, redEye, Colors.getInstance().gEye, blueEye);
+            invalidate();
+        }
+        if (blueEye != Colors.getInstance().bEye) {
+            paintEye.setARGB(0xFF, redEye, greenEye, Colors.getInstance().bEye);
+            invalidate();
+        }
+        //}
     }
 
     /*
@@ -181,7 +206,7 @@ public class Face extends SurfaceView {
         redEye = Color.red(paintEye.getColor());
         greenEye = Color.green(paintEye.getColor());
         blueEye = Color.blue(paintEye.getColor());
-        rndPaintHair = new Paint(); //sets colors for face features
+        rndPaintHair = new Paint();
         redHair = rnd.nextInt(256);
         greenHair = rnd.nextInt(256);
         blueHair = rnd.nextInt(256);
@@ -198,7 +223,6 @@ public class Face extends SurfaceView {
         Colors.getInstance().gSkin = greenSkin;
         Colors.getInstance().bSkin = blueSkin;
 
-        calledOnce = true;
         invalidate();
     }
 }

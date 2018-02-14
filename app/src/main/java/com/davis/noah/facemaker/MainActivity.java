@@ -26,21 +26,23 @@ public class MainActivity extends AppCompatActivity {
     //used to set progress of seekbars when user changes radio button
     private SeekBar redSB, greenSB, blueSB;
     private RadioGroup rg;
-    private Face face;
+    private Face face; //for calling methods from Face class within main
     private int check = 0; //used to not call code when first time spinner is pressed
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        face = new Face(getApplicationContext()); //instantiate Face
 
         TextView textRed = (TextView)findViewById(R.id.redTV);
         TextView textGreen = (TextView)findViewById(R.id.greenTV);
         TextView textBlue = (TextView)findViewById(R.id.blueTV);
 
-        RadioButton rbHair = (RadioButton)findViewById(R.id.rbHair);
-        RadioButton rbEyes = (RadioButton)findViewById(R.id.rbEyes);
-        RadioButton rbSkin = (RadioButton)findViewById(R.id.rbSkin);
+        //setting variable for radio buttons
+        final RadioButton rbHair = (RadioButton)findViewById(R.id.rbHair);
+        final RadioButton rbEyes = (RadioButton)findViewById(R.id.rbEyes);
+        final RadioButton rbSkin = (RadioButton)findViewById(R.id.rbSkin);
 
         //register seekListener with the three TextViews & RadioButtons (needed for color change to face feature)
         seekListener listenSeek = new seekListener(textRed, textGreen, textBlue, rbHair, rbEyes, rbSkin);
@@ -57,30 +59,52 @@ public class MainActivity extends AppCompatActivity {
         rg = (RadioGroup)findViewById(R.id.radioGroup);
         rg.setOnCheckedChangeListener(checker);
 
-        //register Random Face button with onClickListener
-        Button randomButton = (Button)findViewById(R.id.bnRandomFace);
-        randomButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                face = new Face(getApplicationContext());
-                face.randomize();
-            }
-        });
-
-        Spinner spHairstyle = (Spinner)findViewById(R.id.hairStyleSpin);
+        //spinner selection control
+        //gets or sets the spinner selection and uses it to change spinner selection or face's hairstyle
+        final Spinner spHairstyle = (Spinner)findViewById(R.id.hairStyleSpin);
         spHairstyle.setSelection(Colors.getInstance().hairstyle);
         spHairstyle.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (++check > 1)
-                Colors.getInstance().hairstyle = position;
-                face = new Face(getApplicationContext());
-                face.invalidate();
+                //if statement in place so it doesn't run when user just clicks on the spinner
+                //waits for the second selection which would be the new hairstyle the user selected
+                if (++check > 1) {
+                    Colors.getInstance().hairstyle = position;
+                    face.invalidate();
+                }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 //do nothing
+            }
+        });
+
+        //register Random Face button with onClickListener
+        Button randomButton = (Button)findViewById(R.id.bnRandomFace);
+        randomButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                face.randomize(); //calls randomize function to get new colors and hairstyle
+
+                //sets what selection the spinner should be showing based off new hairstyle
+                //goes through and sets seekbars to match new colors based on radio button checked
+                spHairstyle.setSelection(Colors.getInstance().hairstyle);
+                if (rbHair.isChecked() == true) {
+                    redSB.setProgress(Colors.getInstance().rHair);
+                    greenSB.setProgress(Colors.getInstance().gHair);
+                    blueSB.setProgress(Colors.getInstance().bHair);
+                }
+                else if (rbEyes.isChecked() == true) {
+                    redSB.setProgress(Colors.getInstance().rEye);
+                    greenSB.setProgress(Colors.getInstance().gEye);
+                    blueSB.setProgress(Colors.getInstance().bEye);
+                }
+                else if (rbSkin.isChecked() == true) {
+                    redSB.setProgress(Colors.getInstance().rSkin);
+                    greenSB.setProgress(Colors.getInstance().gSkin);
+                    blueSB.setProgress(Colors.getInstance().bSkin);
+                }
             }
         });
     }
