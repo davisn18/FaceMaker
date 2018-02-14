@@ -78,12 +78,12 @@ public class Face extends SurfaceView {
         //sclera drawing
         canvas.drawOval(500f, 800f, 800f, 1100f, white);
         canvas.drawOval(1000f, 800f, 1300f, 1100f, white);
-        //pupil drawing
-        canvas.drawCircle(650f, 950f, 120f, black);
-        canvas.drawCircle(1150f, 950f, 120f, black);
         //iris drawing
-        canvas.drawCircle(650f, 950f, 75f, paintEye);
-        canvas.drawCircle(1150f, 950f, 75f, paintEye);
+        canvas.drawCircle(650f, 950f, 120f, paintEye);
+        canvas.drawCircle(1150f, 950f, 120f, paintEye);
+        //pupil drawing
+        canvas.drawCircle(650f, 950f, 75f, black);
+        canvas.drawCircle(1150f, 950f, 75f, black);
         //draw mouth
         canvas.drawArc(600f, 1200f, 1200f, 1500f, 0f, 180f, false, black);
         for (int i = 0; i < 520; i +=40)
@@ -124,41 +124,31 @@ public class Face extends SurfaceView {
 
         if (redSkin != Globals.getInstance().rSkin) {
             paintSkin.setARGB(0xFF, Globals.getInstance().rSkin, greenSkin, blueSkin);
-            invalidate();
         }
         if (greenSkin != Globals.getInstance().gSkin) {
             paintSkin.setARGB(0xFF, redSkin, Globals.getInstance().gSkin, blueSkin);
-            invalidate();
         }
         if (blueSkin != Globals.getInstance().bSkin) {
             paintSkin.setARGB(0xFF, redSkin, greenSkin, Globals.getInstance().bSkin);
-            invalidate();
         }
         if (redHair != Globals.getInstance().rHair) {
             rndPaintHair.setARGB(0xFF, Globals.getInstance().rHair, greenHair, blueHair);
-            invalidate();
         }
         if (greenHair != Globals.getInstance().gHair) {
             rndPaintHair.setARGB(0xFF, redHair, Globals.getInstance().gHair, blueHair);
-            invalidate();
         }
         if (blueHair != Globals.getInstance().bHair) {
             rndPaintHair.setARGB(0xFF, redHair, greenHair, Globals.getInstance().bHair);
-            invalidate();
         }
         if (redEye != Globals.getInstance().rEye) {
             paintEye.setARGB(0xFF, Globals.getInstance().rEye, greenEye, blueEye);
-            invalidate();
         }
         if (greenEye != Globals.getInstance().gEye) {
             paintEye.setARGB(0xFF, redEye, Globals.getInstance().gEye, blueEye);
-            invalidate();
         }
         if (blueEye != Globals.getInstance().bEye) {
             paintEye.setARGB(0xFF, redEye, greenEye, Globals.getInstance().bEye);
-            invalidate();
         }
-        //}
     }
 
     /*

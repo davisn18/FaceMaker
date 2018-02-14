@@ -12,7 +12,6 @@ public class Globals {
     //using these ints to get RGB values from the randomly selected colors
     public int rHair, gHair, bHair, rEye, gEye, bEye, rSkin, gSkin, bSkin;
     public int hairstyle; //used to default spinner with correct hairstyle on intial run
-    public Face globalFace;
 
     public static synchronized Globals getInstance() {
         if (null == ourInstance) {

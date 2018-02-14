@@ -26,15 +26,14 @@ public class MainActivity extends AppCompatActivity {
     //used to set progress of seekbars when user changes radio button
     private SeekBar redSB, greenSB, blueSB;
     private RadioGroup rg;
-    private Face face; //for calling methods from Face class within main
     private int check = 0; //used to not call code when first time spinner is pressed
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        face = new Face(getApplicationContext()); //instantiate Face
-        Globals.getInstance().globalFace = face;
+
+        final Face face = (Face)findViewById(R.id.svFace);
 
         TextView textRed = (TextView)findViewById(R.id.redTV);
         TextView textGreen = (TextView)findViewById(R.id.greenTV);
@@ -46,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         final RadioButton rbSkin = (RadioButton)findViewById(R.id.rbSkin);
 
         //register seekListener with the three TextViews & RadioButtons (needed for color change to face feature)
-        seekListener listenSeek = new seekListener(textRed, textGreen, textBlue, rbHair, rbEyes, rbSkin);
+        seekListener listenSeek = new seekListener(textRed, textGreen, textBlue, rbHair, rbEyes, rbSkin, face);
         //set each seekbar to run off the seekListener
         redSB = (SeekBar)findViewById(R.id.sbRed);
         greenSB = (SeekBar)findViewById(R.id.sbGreen);

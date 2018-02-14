@@ -1,6 +1,5 @@
 package com.davis.noah.facemaker;
 
-import android.content.Context;
 import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -17,14 +16,13 @@ public class seekListener implements SeekBar.OnSeekBarChangeListener {
 
     private ArrayList<TextView> textViews = new ArrayList<TextView>();
     private ArrayList<RadioButton> radioButtons = new ArrayList<RadioButton>();
-
-    private Face face1 = Globals.getInstance().globalFace;
-
+    private Face newFace;
 
     public seekListener(TextView textRed, TextView textGreen, TextView textBlue,
-                        RadioButton hairRB, RadioButton eyesRB, RadioButton skinRB) {
+                        RadioButton hairRB, RadioButton eyesRB, RadioButton skinRB, Face face) {
         textViews.addAll(Arrays.asList(textRed, textGreen, textBlue));
         radioButtons.addAll(Arrays.asList(hairRB, eyesRB, skinRB));
+        newFace = face;
 
     }
 
@@ -43,10 +41,8 @@ public class seekListener implements SeekBar.OnSeekBarChangeListener {
             case R.id.sbRed:
                 textViews.get(0).setText("Red: " + progress);
                 //checks if any radiobutton is checked, if so sets new value to global variable
-                    if (radioButtons.get(0).isChecked() == true) {
+                    if (radioButtons.get(0).isChecked() == true)
                         Globals.getInstance().rHair = progress;
-                        face1.invalidate();
-                    }
                     else if (radioButtons.get(1).isChecked() == true)
                         Globals.getInstance().rEye = progress;
                     else if (radioButtons.get(2).isChecked() == true)
@@ -73,6 +69,7 @@ public class seekListener implements SeekBar.OnSeekBarChangeListener {
                     Globals.getInstance().bSkin = progress;
                 break;
         }
+        newFace.invalidate();
     }
 
     @Override
