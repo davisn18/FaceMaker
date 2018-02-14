@@ -5,10 +5,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static com.davis.noah.facemaker.R.id.blueTV;
-import static com.davis.noah.facemaker.R.id.greenTV;
-import static com.davis.noah.facemaker.R.id.redTV;
-
 /**
  * Created by Noah Davis on 2/12/2018.
  */

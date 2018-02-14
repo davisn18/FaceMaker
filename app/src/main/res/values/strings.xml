@@ -5,6 +5,7 @@
         <item>Mohawk</item>
         <item>Bald</item>
         <item>Flat Top</item>
+        <item>Afro</item>
     </string-array>
     <string-array name="eyeColors">
         <item>#663300</item>

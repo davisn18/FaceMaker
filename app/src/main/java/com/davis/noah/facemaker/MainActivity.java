@@ -1,10 +1,17 @@
 package com.davis.noah.facemaker;
 
+import android.content.Context;
+import android.os.Build;
+import android.support.annotation.IdRes;
+import android.support.annotation.RequiresApi;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.SurfaceView;
+import android.text.Layout;
+import android.view.View;
+import android.widget.Button;
+import android.widget.RadioGroup;
 import android.widget.SeekBar;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 /**
@@ -13,8 +20,9 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private String[] hairStyles =
-            {"Mohwak", "Bald", "Flat Top"};
+    //used to set progress of seekbars when user changes radio button
+    private SeekBar redSB, greenSB, blueSB;
+    private RadioGroup rg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,15 +35,25 @@ public class MainActivity extends AppCompatActivity {
         //register seekListener with the three TextViews
         seekListener listenSeek = new seekListener(textRed, textGreen, textBlue);
         //set each seekbar to run off the seekListener
-        SeekBar seekRed = (SeekBar)findViewById(R.id.sbRed);
-        SeekBar seekGreen = (SeekBar)findViewById(R.id.sbGreen);
-        SeekBar seekBlue = (SeekBar)findViewById(R.id.sbBlue);
-        seekRed.setOnSeekBarChangeListener(listenSeek);
-        seekGreen.setOnSeekBarChangeListener(listenSeek);
-        seekBlue.setOnSeekBarChangeListener(listenSeek);
+        redSB = (SeekBar)findViewById(R.id.sbRed);
+        greenSB = (SeekBar)findViewById(R.id.sbGreen);
+        blueSB = (SeekBar)findViewById(R.id.sbBlue);
+        redSB.setOnSeekBarChangeListener(listenSeek);
+        greenSB.setOnSeekBarChangeListener(listenSeek);
+        blueSB.setOnSeekBarChangeListener(listenSeek);
 
+        //controller used for radio buttons and changing seekbar progress with RGB values of color of the face feature
+        OnChecked checker = new OnChecked(redSB, greenSB, blueSB);
+        rg = (RadioGroup)findViewById(R.id.radioGroup);
+        rg.setOnCheckedChangeListener(checker);
 
+        //register Random Face button with onClickListener
+        Button randomButton = (Button)findViewById(R.id.bnRandomFace);
+        randomButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
     }
-
 }
