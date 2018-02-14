@@ -73,7 +73,7 @@ public class Face extends SurfaceView {
         black = new Paint();
         black.setColor(Color.BLACK);
 
-        drawHair(canvas, hairText.get(Colors.getInstance().hairstyle));
+        drawHair(canvas, hairText.get(Globals.getInstance().hairstyle));
         canvas.drawCircle(900f, 1100f, 600f, paintSkin); //draw head
         //sclera drawing
         canvas.drawOval(500f, 800f, 800f, 1100f, white);
@@ -119,43 +119,43 @@ public class Face extends SurfaceView {
      */
     public void Checker() {
 
-        if (Colors.getInstance().hairstyle != hairStyle)
-            hairStyleString = hairText.get(Colors.getInstance().hairstyle);
+        if (Globals.getInstance().hairstyle != hairStyle)
+            hairStyleString = hairText.get(Globals.getInstance().hairstyle);
 
-        if (redSkin != Colors.getInstance().rSkin) {
-            paintSkin.setARGB(0xFF, Colors.getInstance().rSkin, greenSkin, blueSkin);
+        if (redSkin != Globals.getInstance().rSkin) {
+            paintSkin.setARGB(0xFF, Globals.getInstance().rSkin, greenSkin, blueSkin);
             invalidate();
         }
-        if (greenSkin != Colors.getInstance().gSkin) {
-            paintSkin.setARGB(0xFF, redSkin, Colors.getInstance().gSkin, blueSkin);
+        if (greenSkin != Globals.getInstance().gSkin) {
+            paintSkin.setARGB(0xFF, redSkin, Globals.getInstance().gSkin, blueSkin);
             invalidate();
         }
-        if (blueSkin != Colors.getInstance().bSkin) {
-            paintSkin.setARGB(0xFF, redSkin, greenSkin, Colors.getInstance().bSkin);
+        if (blueSkin != Globals.getInstance().bSkin) {
+            paintSkin.setARGB(0xFF, redSkin, greenSkin, Globals.getInstance().bSkin);
             invalidate();
         }
-        if (redHair != Colors.getInstance().rHair) {
-            rndPaintHair.setARGB(0xFF, Colors.getInstance().rHair, greenHair, blueHair);
+        if (redHair != Globals.getInstance().rHair) {
+            rndPaintHair.setARGB(0xFF, Globals.getInstance().rHair, greenHair, blueHair);
             invalidate();
         }
-        if (greenHair != Colors.getInstance().gHair) {
-            rndPaintHair.setARGB(0xFF, redHair, Colors.getInstance().gHair, blueHair);
+        if (greenHair != Globals.getInstance().gHair) {
+            rndPaintHair.setARGB(0xFF, redHair, Globals.getInstance().gHair, blueHair);
             invalidate();
         }
-        if (blueHair != Colors.getInstance().bHair) {
-            rndPaintHair.setARGB(0xFF, redHair, greenHair, Colors.getInstance().bHair);
+        if (blueHair != Globals.getInstance().bHair) {
+            rndPaintHair.setARGB(0xFF, redHair, greenHair, Globals.getInstance().bHair);
             invalidate();
         }
-        if (redEye != Colors.getInstance().rEye) {
-            paintEye.setARGB(0xFF, Colors.getInstance().rEye, greenEye, blueEye);
+        if (redEye != Globals.getInstance().rEye) {
+            paintEye.setARGB(0xFF, Globals.getInstance().rEye, greenEye, blueEye);
             invalidate();
         }
-        if (greenEye != Colors.getInstance().gEye) {
-            paintEye.setARGB(0xFF, redEye, Colors.getInstance().gEye, blueEye);
+        if (greenEye != Globals.getInstance().gEye) {
+            paintEye.setARGB(0xFF, redEye, Globals.getInstance().gEye, blueEye);
             invalidate();
         }
-        if (blueEye != Colors.getInstance().bEye) {
-            paintEye.setARGB(0xFF, redEye, greenEye, Colors.getInstance().bEye);
+        if (blueEye != Globals.getInstance().bEye) {
+            paintEye.setARGB(0xFF, redEye, greenEye, Globals.getInstance().bEye);
             invalidate();
         }
         //}
@@ -193,7 +193,7 @@ public class Face extends SurfaceView {
         hairText = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.arrayHairstyle)));
         hairStyle = rnd.nextInt(4); //random int from 0-3
         hairStyleString = hairText.get(hairStyle);
-        Colors.getInstance().hairstyle = hairStyle; //sets to global
+        Globals.getInstance().hairstyle = hairStyle; //sets to global
 
         //gets random colors from given arrays or random integers and sets them to paint and RGB variables
         paintSkin = new Paint();
@@ -213,15 +213,15 @@ public class Face extends SurfaceView {
         rndPaintHair.setARGB(0xFF, redHair, greenHair, blueHair);
 
         //sets all the colors to "global" variables so they can be used elsewhere
-        Colors.getInstance().rHair = redHair;
-        Colors.getInstance().gHair = greenHair;
-        Colors.getInstance().bHair = blueHair;
-        Colors.getInstance().rEye = redEye;
-        Colors.getInstance().gEye = greenEye;
-        Colors.getInstance().bEye = blueEye;
-        Colors.getInstance().rSkin = redSkin;
-        Colors.getInstance().gSkin = greenSkin;
-        Colors.getInstance().bSkin = blueSkin;
+        Globals.getInstance().rHair = redHair;
+        Globals.getInstance().gHair = greenHair;
+        Globals.getInstance().bHair = blueHair;
+        Globals.getInstance().rEye = redEye;
+        Globals.getInstance().gEye = greenEye;
+        Globals.getInstance().bEye = blueEye;
+        Globals.getInstance().rSkin = redSkin;
+        Globals.getInstance().gSkin = greenSkin;
+        Globals.getInstance().bSkin = blueSkin;
 
         invalidate();
     }

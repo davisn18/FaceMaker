@@ -32,19 +32,19 @@ public class OnChecked implements RadioGroup.OnCheckedChangeListener {
         //0 = red, 1 = green, 2 = blue (in order of arraylist above)
         switch (checkedId) {
             case R.id.rbHair:
-                seeks.get(0).setProgress(Colors.getInstance().rHair);
-                seeks.get(1).setProgress(Colors.getInstance().gHair);
-                seeks.get(2).setProgress(Colors.getInstance().bHair);
+                seeks.get(0).setProgress(Globals.getInstance().rHair);
+                seeks.get(1).setProgress(Globals.getInstance().gHair);
+                seeks.get(2).setProgress(Globals.getInstance().bHair);
                 break;
             case R.id.rbEyes:
-                seeks.get(0).setProgress(Colors.getInstance().rEye);
-                seeks.get(1).setProgress(Colors.getInstance().gEye);
-                seeks.get(2).setProgress(Colors.getInstance().bEye);
+                seeks.get(0).setProgress(Globals.getInstance().rEye);
+                seeks.get(1).setProgress(Globals.getInstance().gEye);
+                seeks.get(2).setProgress(Globals.getInstance().bEye);
                 break;
             case R.id.rbSkin:
-                seeks.get(0).setProgress(Colors.getInstance().rSkin);
-                seeks.get(1).setProgress(Colors.getInstance().gSkin);
-                seeks.get(2).setProgress(Colors.getInstance().bSkin);
+                seeks.get(0).setProgress(Globals.getInstance().rSkin);
+                seeks.get(1).setProgress(Globals.getInstance().gSkin);
+                seeks.get(2).setProgress(Globals.getInstance().bSkin);
                 break;
         }
     }

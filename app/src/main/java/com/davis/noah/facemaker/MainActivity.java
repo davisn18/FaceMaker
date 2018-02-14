@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         face = new Face(getApplicationContext()); //instantiate Face
+        Globals.getInstance().globalFace = face;
 
         TextView textRed = (TextView)findViewById(R.id.redTV);
         TextView textGreen = (TextView)findViewById(R.id.greenTV);
@@ -62,14 +63,14 @@ public class MainActivity extends AppCompatActivity {
         //spinner selection control
         //gets or sets the spinner selection and uses it to change spinner selection or face's hairstyle
         final Spinner spHairstyle = (Spinner)findViewById(R.id.hairStyleSpin);
-        spHairstyle.setSelection(Colors.getInstance().hairstyle);
+        spHairstyle.setSelection(Globals.getInstance().hairstyle);
         spHairstyle.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 //if statement in place so it doesn't run when user just clicks on the spinner
                 //waits for the second selection which would be the new hairstyle the user selected
                 if (++check > 1) {
-                    Colors.getInstance().hairstyle = position;
+                    Globals.getInstance().hairstyle = position;
                     face.invalidate();
                 }
             }
@@ -89,21 +90,21 @@ public class MainActivity extends AppCompatActivity {
 
                 //sets what selection the spinner should be showing based off new hairstyle
                 //goes through and sets seekbars to match new colors based on radio button checked
-                spHairstyle.setSelection(Colors.getInstance().hairstyle);
+                spHairstyle.setSelection(Globals.getInstance().hairstyle);
                 if (rbHair.isChecked() == true) {
-                    redSB.setProgress(Colors.getInstance().rHair);
-                    greenSB.setProgress(Colors.getInstance().gHair);
-                    blueSB.setProgress(Colors.getInstance().bHair);
+                    redSB.setProgress(Globals.getInstance().rHair);
+                    greenSB.setProgress(Globals.getInstance().gHair);
+                    blueSB.setProgress(Globals.getInstance().bHair);
                 }
                 else if (rbEyes.isChecked() == true) {
-                    redSB.setProgress(Colors.getInstance().rEye);
-                    greenSB.setProgress(Colors.getInstance().gEye);
-                    blueSB.setProgress(Colors.getInstance().bEye);
+                    redSB.setProgress(Globals.getInstance().rEye);
+                    greenSB.setProgress(Globals.getInstance().gEye);
+                    blueSB.setProgress(Globals.getInstance().bEye);
                 }
                 else if (rbSkin.isChecked() == true) {
-                    redSB.setProgress(Colors.getInstance().rSkin);
-                    greenSB.setProgress(Colors.getInstance().gSkin);
-                    blueSB.setProgress(Colors.getInstance().bSkin);
+                    redSB.setProgress(Globals.getInstance().rSkin);
+                    greenSB.setProgress(Globals.getInstance().gSkin);
+                    blueSB.setProgress(Globals.getInstance().bSkin);
                 }
             }
         });

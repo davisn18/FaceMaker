@@ -1,5 +1,6 @@
 package com.davis.noah.facemaker;
 
+import android.content.Context;
 import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -16,6 +17,9 @@ public class seekListener implements SeekBar.OnSeekBarChangeListener {
 
     private ArrayList<TextView> textViews = new ArrayList<TextView>();
     private ArrayList<RadioButton> radioButtons = new ArrayList<RadioButton>();
+
+    private Face face1 = Globals.getInstance().globalFace;
+
 
     public seekListener(TextView textRed, TextView textGreen, TextView textBlue,
                         RadioButton hairRB, RadioButton eyesRB, RadioButton skinRB) {
@@ -40,33 +44,33 @@ public class seekListener implements SeekBar.OnSeekBarChangeListener {
                 textViews.get(0).setText("Red: " + progress);
                 //checks if any radiobutton is checked, if so sets new value to global variable
                     if (radioButtons.get(0).isChecked() == true) {
-                        Colors.getInstance().rHair = progress;
-
+                        Globals.getInstance().rHair = progress;
+                        face1.invalidate();
                     }
                     else if (radioButtons.get(1).isChecked() == true)
-                        Colors.getInstance().rEye = progress;
+                        Globals.getInstance().rEye = progress;
                     else if (radioButtons.get(2).isChecked() == true)
-                        Colors.getInstance().rSkin = progress;
+                        Globals.getInstance().rSkin = progress;
                 break;
 
             case R.id.sbGreen:
                 textViews.get(1).setText("Green: " + progress);
                 if (radioButtons.get(0).isChecked() == true)
-                    Colors.getInstance().gHair = progress;
+                    Globals.getInstance().gHair = progress;
                 else if (radioButtons.get(1).isChecked() == true)
-                    Colors.getInstance().gEye = progress;
+                    Globals.getInstance().gEye = progress;
                 else if (radioButtons.get(2).isChecked() == true)
-                    Colors.getInstance().gSkin = progress;
+                    Globals.getInstance().gSkin = progress;
                 break;
 
             case R.id.sbBlue:
                 textViews.get(2).setText("Blue: " + progress);
                 if (radioButtons.get(0).isChecked() == true)
-                    Colors.getInstance().bHair = progress;
+                    Globals.getInstance().bHair = progress;
                 else if (radioButtons.get(1).isChecked() == true)
-                    Colors.getInstance().bEye = progress;
+                    Globals.getInstance().bEye = progress;
                 else if (radioButtons.get(2).isChecked() == true)
-                    Colors.getInstance().bSkin = progress;
+                    Globals.getInstance().bSkin = progress;
                 break;
         }
     }
