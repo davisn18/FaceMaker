@@ -5,16 +5,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Build;
-import android.support.annotation.IdRes;
 import android.support.annotation.RequiresApi;
-import android.support.v7.app.AppCompatActivity;
-import android.text.Layout;
 import android.util.AttributeSet;
 import android.view.SurfaceView;
-import android.view.View;
-import android.widget.RadioGroup;
-import android.widget.SeekBar;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -30,6 +23,9 @@ public class Face extends SurfaceView {
     private Paint paintSkin, paintEye, rndPaintHair, white, black; //create paint colors
     private int redSkin, greenSkin, blueSkin, redEye, greenEye, blueEye, redHair, greenHair, blueHair;
     private String hairStyleString;
+    private int hairStyle; //takes on random value
+    private boolean calledOnce; //keeps control of not setting global vars twice (in randomize method)
+    private List<String> hairText; //keeps hairStyles in a string list
 
     private SurfaceView sv;
 
@@ -61,11 +57,6 @@ public class Face extends SurfaceView {
     private void generalInit() {
         setWillNotDraw(false);
         randomize();
-        MainActivity main = new MainActivity();
-
-        //main.rHair = redHair; main.gHair = greenHair; main.bHair = blueHair;
-        //main.rEye = redEye; main.gEye = greenEye; main.bEye = blueEye;
-        //main.rSkin = redSkin; main.gSkin = greenSkin; main.bSkin = blueSkin;
         sv = (SurfaceView)findViewById(R.id.svFace);
     }
 
@@ -73,6 +64,9 @@ public class Face extends SurfaceView {
     @Override
     public void onDraw(Canvas canvas)
     {
+
+        Checker(); //will change values if need be before drawing
+
         //setting white to color of sclera
         white = new Paint();
         white.setColor(Color.WHITE);
@@ -114,10 +108,38 @@ public class Face extends SurfaceView {
             return;
     }
 
+    public void Checker() {
+        if (calledOnce == true) {
+            if (Colors.getInstance().hairstyle != hairStyle)
+                hairStyleString = hairText.get(Colors.getInstance().hairstyle);
+            if (redSkin != Colors.getInstance().rSkin) {
+                paintSkin.setARGB(0xFF, Colors.getInstance().rSkin, greenSkin, blueSkin);
+                invalidate();
+                return;
+            }
+            if (greenSkin != Colors.getInstance().gSkin)
+                paintSkin.setARGB(0xFF, redSkin, Colors.getInstance().gSkin, blueSkin);
+            if (blueSkin != Colors.getInstance().bSkin)
+                paintSkin.setARGB(0xFF, redSkin, greenSkin, Colors.getInstance().bSkin);
+            if (redHair != Colors.getInstance().rHair)
+                rndPaintHair.setARGB(0xFF, Colors.getInstance().rHair, greenHair, blueHair);
+            if (greenHair != Colors.getInstance().gHair)
+                rndPaintHair.setARGB(0xFF, redHair, Colors.getInstance().gHair, blueHair);
+            if (blueHair != Colors.getInstance().bHair)
+                rndPaintHair.setARGB(0xFF, redHair, greenHair, Colors.getInstance().bHair);
+            if (redEye != Colors.getInstance().rEye)
+                paintEye.setARGB(0xFF, Colors.getInstance().rEye, greenEye, blueEye);
+            if (greenEye != Colors.getInstance().gEye)
+                paintEye.setARGB(0xFF, redEye, Colors.getInstance().gEye, blueEye);
+            if (blueEye != Colors.getInstance().bEye)
+                paintEye.setARGB(0xFF, redEye, greenEye, Colors.getInstance().bEye);
+        }
+    }
+
     /*
      * method randomizes colors for eye, skin, hair and picks a random hairstyle
      */
-    private void randomize() {
+    public void randomize() {
         /**
          External Citation
          Date: 12 February 2018
@@ -143,17 +165,19 @@ public class Face extends SurfaceView {
         }
 
         //puts arrayHairstyle from strings.xml into arrayList
-        List<String> hairText = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.arrayHairstyle)));
-        hairStyleString = hairText.get(rnd.nextInt(3-1) + 1);
+        hairText = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.arrayHairstyle)));
+        hairStyle = rnd.nextInt(4); //random int from 0-3
+        hairStyleString = hairText.get(hairStyle);
+        Colors.getInstance().hairstyle = hairStyle; //sets to global
 
         //gets random colors from given arrays or random integers and sets them to paint and RGB variables
         paintSkin = new Paint();
-        paintSkin.setColor(skinColorsList.get(rnd.nextInt(5))); //takes random color from list
+        paintSkin.setColor(skinColorsList.get(rnd.nextInt(6))); //takes random color from list
         redSkin = Color.red(paintSkin.getColor());
         greenSkin = Color.green(paintSkin.getColor());
         blueSkin = Color.blue(paintSkin.getColor());
         paintEye = new Paint();
-        paintEye.setColor(eyeColorsList.get(rnd.nextInt(5))); //takes random color from list
+        paintEye.setColor(eyeColorsList.get(rnd.nextInt(6))); //takes random color from list
         redEye = Color.red(paintEye.getColor());
         greenEye = Color.green(paintEye.getColor());
         blueEye = Color.blue(paintEye.getColor());
@@ -168,10 +192,13 @@ public class Face extends SurfaceView {
         Colors.getInstance().gHair = greenHair;
         Colors.getInstance().bHair = blueHair;
         Colors.getInstance().rEye = redEye;
-        Colors.getInstance().rEye = greenEye;
+        Colors.getInstance().gEye = greenEye;
         Colors.getInstance().bEye = blueEye;
         Colors.getInstance().rSkin = redSkin;
         Colors.getInstance().gSkin = greenSkin;
         Colors.getInstance().bSkin = blueSkin;
+
+        calledOnce = true;
+        invalidate();
     }
 }

@@ -9,9 +9,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Layout;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 /**
@@ -23,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     //used to set progress of seekbars when user changes radio button
     private SeekBar redSB, greenSB, blueSB;
     private RadioGroup rg;
+    private Face face;
+    private int check = 0; //used to not call code when first time spinner is pressed
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +37,13 @@ public class MainActivity extends AppCompatActivity {
         TextView textRed = (TextView)findViewById(R.id.redTV);
         TextView textGreen = (TextView)findViewById(R.id.greenTV);
         TextView textBlue = (TextView)findViewById(R.id.blueTV);
-        //register seekListener with the three TextViews
-        seekListener listenSeek = new seekListener(textRed, textGreen, textBlue);
+
+        RadioButton rbHair = (RadioButton)findViewById(R.id.rbHair);
+        RadioButton rbEyes = (RadioButton)findViewById(R.id.rbEyes);
+        RadioButton rbSkin = (RadioButton)findViewById(R.id.rbSkin);
+
+        //register seekListener with the three TextViews & RadioButtons (needed for color change to face feature)
+        seekListener listenSeek = new seekListener(textRed, textGreen, textBlue, rbHair, rbEyes, rbSkin);
         //set each seekbar to run off the seekListener
         redSB = (SeekBar)findViewById(R.id.sbRed);
         greenSB = (SeekBar)findViewById(R.id.sbGreen);
@@ -52,7 +62,25 @@ public class MainActivity extends AppCompatActivity {
         randomButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                face = new Face(getApplicationContext());
+                face.randomize();
+            }
+        });
 
+        Spinner spHairstyle = (Spinner)findViewById(R.id.hairStyleSpin);
+        spHairstyle.setSelection(Colors.getInstance().hairstyle);
+        spHairstyle.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (++check > 1)
+                Colors.getInstance().hairstyle = position;
+                face = new Face(getApplicationContext());
+                face.invalidate();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                //do nothing
             }
         });
     }

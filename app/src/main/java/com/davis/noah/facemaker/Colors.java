@@ -9,6 +9,7 @@ public class Colors {
 
     //using these ints to get RGB values from the randomly selected colors
     public int rHair, gHair, bHair, rEye, gEye, bEye, rSkin, gSkin, bSkin;
+    public int hairstyle; //used to default spinner with correct hairstyle on intial run
 
     public static synchronized Colors getInstance() {
         if (null == ourInstance) {
