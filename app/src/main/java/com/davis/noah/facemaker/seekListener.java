@@ -41,31 +41,31 @@ public class seekListener implements SeekBar.OnSeekBarChangeListener {
             case R.id.sbRed:
                 textViews.get(0).setText("Red: " + progress);
                 //checks if any radiobutton is checked, if so sets new value to global variable
-                    if (radioButtons.get(0).isChecked() == true)
+                    if (radioButtons.get(0).isChecked())
                         Globals.getInstance().rHair = progress;
-                    else if (radioButtons.get(1).isChecked() == true)
+                    else if (radioButtons.get(1).isChecked())
                         Globals.getInstance().rEye = progress;
-                    else if (radioButtons.get(2).isChecked() == true)
+                    else if (radioButtons.get(2).isChecked())
                         Globals.getInstance().rSkin = progress;
                 break;
 
             case R.id.sbGreen:
                 textViews.get(1).setText("Green: " + progress);
-                if (radioButtons.get(0).isChecked() == true)
+                if (radioButtons.get(0).isChecked())
                     Globals.getInstance().gHair = progress;
-                else if (radioButtons.get(1).isChecked() == true)
+                else if (radioButtons.get(1).isChecked())
                     Globals.getInstance().gEye = progress;
-                else if (radioButtons.get(2).isChecked() == true)
+                else if (radioButtons.get(2).isChecked())
                     Globals.getInstance().gSkin = progress;
                 break;
 
             case R.id.sbBlue:
                 textViews.get(2).setText("Blue: " + progress);
-                if (radioButtons.get(0).isChecked() == true)
+                if (radioButtons.get(0).isChecked())
                     Globals.getInstance().bHair = progress;
-                else if (radioButtons.get(1).isChecked() == true)
+                else if (radioButtons.get(1).isChecked())
                     Globals.getInstance().bEye = progress;
-                else if (radioButtons.get(2).isChecked() == true)
+                else if (radioButtons.get(2).isChecked())
                     Globals.getInstance().bSkin = progress;
                 break;
         }

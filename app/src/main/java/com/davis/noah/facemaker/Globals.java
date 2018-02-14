@@ -3,6 +3,8 @@ package com.davis.noah.facemaker;
 import android.content.Context;
 
 /**
+ * Created Global variables instead of passing as parameters (sorry)
+ *
  * Created by Noah on 2/14/2018.
  */
 

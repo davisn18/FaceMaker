@@ -124,30 +124,39 @@ public class Face extends SurfaceView {
 
         if (redSkin != Globals.getInstance().rSkin) {
             paintSkin.setARGB(0xFF, Globals.getInstance().rSkin, greenSkin, blueSkin);
+            redSkin = Globals.getInstance().rSkin;
         }
         if (greenSkin != Globals.getInstance().gSkin) {
             paintSkin.setARGB(0xFF, redSkin, Globals.getInstance().gSkin, blueSkin);
+            greenSkin = Globals.getInstance().gSkin;
         }
         if (blueSkin != Globals.getInstance().bSkin) {
             paintSkin.setARGB(0xFF, redSkin, greenSkin, Globals.getInstance().bSkin);
+            blueSkin = Globals.getInstance().bSkin;
         }
         if (redHair != Globals.getInstance().rHair) {
             rndPaintHair.setARGB(0xFF, Globals.getInstance().rHair, greenHair, blueHair);
+            redHair = Globals.getInstance().rHair;
         }
         if (greenHair != Globals.getInstance().gHair) {
             rndPaintHair.setARGB(0xFF, redHair, Globals.getInstance().gHair, blueHair);
+            greenHair = Globals.getInstance().gHair;
         }
         if (blueHair != Globals.getInstance().bHair) {
             rndPaintHair.setARGB(0xFF, redHair, greenHair, Globals.getInstance().bHair);
+            blueHair = Globals.getInstance().bHair;
         }
         if (redEye != Globals.getInstance().rEye) {
             paintEye.setARGB(0xFF, Globals.getInstance().rEye, greenEye, blueEye);
+            redEye = Globals.getInstance().rEye;
         }
         if (greenEye != Globals.getInstance().gEye) {
             paintEye.setARGB(0xFF, redEye, Globals.getInstance().gEye, blueEye);
+            greenEye = Globals.getInstance().gEye;
         }
         if (blueEye != Globals.getInstance().bEye) {
             paintEye.setARGB(0xFF, redEye, greenEye, Globals.getInstance().bEye);
+            blueEye = Globals.getInstance().bEye;
         }
     }
 
@@ -212,7 +221,5 @@ public class Face extends SurfaceView {
         Globals.getInstance().rSkin = redSkin;
         Globals.getInstance().gSkin = greenSkin;
         Globals.getInstance().bSkin = blueSkin;
-
-        invalidate();
     }
 }

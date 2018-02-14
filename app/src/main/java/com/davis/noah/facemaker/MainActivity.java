@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         final RadioButton rbEyes = (RadioButton)findViewById(R.id.rbEyes);
         final RadioButton rbSkin = (RadioButton)findViewById(R.id.rbSkin);
 
-        //register seekListener with the three TextViews & RadioButtons (needed for color change to face feature)
+        //register seekListener with the three TextViews & RadioButtons (needed for color change to face feature) & face
         seekListener listenSeek = new seekListener(textRed, textGreen, textBlue, rbHair, rbEyes, rbSkin, face);
         //set each seekbar to run off the seekListener
         redSB = (SeekBar)findViewById(R.id.sbRed);
